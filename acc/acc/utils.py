@@ -53,3 +53,21 @@ def get_group_account_amounts(account):
             total_credit += amounts['total_credit']
 
     return {'total_debit': total_debit, 'total_credit': total_credit}
+
+
+@frappe.whitelist()
+def create_ledger_entry(transaction_type, name, account, datetime, description, amount):
+    ledger_entry = frappe.new_doc('General Ledger')
+    ledger_entry.entry_name = name
+    ledger_entry.account = account
+    ledger_entry.datetime = datetime
+    ledger_entry.description = description
+
+    if transaction_type == "debit":
+        ledger_entry.debit = amount
+    elif transaction_type == "credit":
+        ledger_entry.credit = amount
+    else:
+        frappe.throw("Invalid transaction type.")
+
+    ledger_entry.insert()

@@ -8,7 +8,8 @@
  "engine": "InnoDB",
  "field_order": [
   "type",
-  "date",
+  "description",
+  "datetime",
   "business_name",
   "business_address",
   "section_break_5",
@@ -22,7 +23,8 @@
   "section_break_12",
   "column_break_13",
   "column_break_15",
-  "total"
+  "total",
+  "amended_from"
  ],
  "fields": [
   {
@@ -31,13 +33,6 @@
    "in_list_view": 1,
    "label": "Type",
    "options": "Sales\nPurchase",
-   "reqd": 1
-  },
-  {
-   "fieldname": "date",
-   "fieldtype": "Date",
-   "in_list_view": 1,
-   "label": "Date",
    "reqd": 1
   },
   {
@@ -124,11 +119,34 @@
   {
    "fieldname": "section_break_5",
    "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Invoice",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "datetime",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Datetime",
+   "reqd": 1
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Data",
+   "label": "Description",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
+ "is_submittable": 1,
  "links": [],
- "modified": "2022-08-24 11:35:25.679327",
+ "modified": "2022-08-29 21:14:54.347478",
  "modified_by": "Administrator",
  "module": "Acc",
  "name": "Invoice",
