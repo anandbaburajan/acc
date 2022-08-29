@@ -8,10 +8,6 @@
  "engine": "InnoDB",
  "field_order": [
   "account_name",
-  "debit",
-  "credit",
-  "balance_amount",
-  "balance_type",
   "lft",
   "rgt",
   "is_group",
@@ -60,38 +56,12 @@
    "fieldtype": "Link",
    "label": "Parent Account",
    "options": "Account"
-  },
-  {
-   "fieldname": "debit",
-   "fieldtype": "Currency",
-   "in_list_view": 1,
-   "label": "Debit",
-   "reqd": 1
-  },
-  {
-   "fieldname": "credit",
-   "fieldtype": "Currency",
-   "label": "Credit",
-   "reqd": 1
-  },
-  {
-   "fieldname": "balance_amount",
-   "fieldtype": "Currency",
-   "label": "Balance Amount",
-   "reqd": 1
-  },
-  {
-   "fieldname": "balance_type",
-   "fieldtype": "Select",
-   "label": "Balance Type",
-   "options": "None\nDebit\nCredit",
-   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_tree": 1,
  "links": [],
- "modified": "2022-08-22 16:37:36.617996",
+ "modified": "2022-08-29 12:51:22.771913",
  "modified_by": "Administrator",
  "module": "Acc",
  "name": "Account",

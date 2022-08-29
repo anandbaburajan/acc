@@ -20,21 +20,33 @@ frappe.treeview_settings["Account"] = {
     },
   ],
   on_get_node: function (nodes, deep = false) {
-    const get_balances = frappe.db.get_list("Account", {
-      fields: ["account_name", "balance_amount", "balance_type"],
+    let accounts = [];
+    if (deep) {
+      // in case of `get_all_nodes`
+      accounts = nodes.reduce((acc, node) => [...acc, ...node.data], []);
+    } else {
+      accounts = nodes;
+    }
+
+    const get_balances = frappe.call({
+      method: "acc.acc.utils.get_account_balances",
+      args: {
+        accounts: accounts,
+      },
     });
+
     get_balances.then((r) => {
-      for (let account of r) {
-        const node = cur_tree.nodes && cur_tree.nodes[account.account_name];
+      for (let account of r.message) {
+        const node = cur_tree.nodes && cur_tree.nodes[account.value];
         if (!node || node.is_root) continue;
 
-        const balance = account.balance_amount;
-        const balance_type = account.balance_type;
+        const balance = account.balance;
+        const balance_type = balance > 0 ? "Dr" : "Cr";
 
         node.parent && node.parent.find(".balance-area").remove();
         $(
           '<span class="balance-area pull-right">' +
-            balance +
+            Math.abs(balance) +
             " " +
             balance_type +
             "</span>"

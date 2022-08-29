@@ -5,5 +5,5 @@
 from frappe.tests.utils import FrappeTestCase
 
 
-class TestLedgerEntry(FrappeTestCase):
+class TestGeneralLedger(FrappeTestCase):
 	pass

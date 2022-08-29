@@ -6,21 +6,15 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "date",
+  "datetime",
   "description",
   "debit_account",
   "debit_amount",
   "credit_account",
-  "credit_amount"
+  "credit_amount",
+  "amended_from"
  ],
  "fields": [
-  {
-   "fieldname": "date",
-   "fieldtype": "Date",
-   "in_list_view": 1,
-   "label": "Date",
-   "reqd": 1
-  },
   {
    "fieldname": "description",
    "fieldtype": "Data",
@@ -53,11 +47,28 @@
    "fieldtype": "Currency",
    "label": "Credit Amount",
    "reqd": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Journal Entry",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "datetime",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Datetime",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
+ "is_submittable": 1,
  "links": [],
- "modified": "2022-08-22 19:37:06.082759",
+ "modified": "2022-08-29 13:21:16.486380",
  "modified_by": "Administrator",
  "module": "Acc",
  "name": "Journal Entry",

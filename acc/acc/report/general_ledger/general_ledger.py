@@ -37,11 +37,35 @@ def execute(filters=None):
         }
     ]
 
-    data = frappe.db.get_list(
-        'Ledger Entry',
-        filters={'account': filters.get("account")},
-        fields=['account', 'date', 'description', 'debit', 'credit'],
-        order_by='date desc'
-    )
+    data = get_account_data(filters.get("account"))
 
     return columns, data
+
+
+def get_account_data(account_name):
+    account = frappe.db.get_list(
+        'Account',
+        filters={'account_name': account_name},
+        fields=['account_name', 'is_group'],
+    )[0]
+
+    data = []
+
+    if account['is_group']:
+        child_accounts = frappe.db.get_list(
+            'Account',
+            filters={'parent_account': account_name},
+            fields=['account_name']
+        )
+
+        for child_account in child_accounts:
+            data.append(get_account_data(child_account['account_name'])[0])
+    else:
+        data = frappe.db.get_list(
+            'General Ledger',
+            filters={'account': account_name},
+            fields=['account', 'date', 'description', 'debit', 'credit'],
+            order_by='date desc'
+        )
+
+    return data
